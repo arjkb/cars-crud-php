@@ -42,6 +42,7 @@ cars.owner_id = users.id');
                 <td><?= $row['transmission'] ?></td>
                 <td><?= $row['username'] ?></td>
                 <td>
+                <?php if(isset($_SESSION['userid'])): ?>
                 <?php
                     $delete_confirmation_msg = "Are you sure you wish to delete #".
                     $row['id'].' '.$row['year'].' '.$row['make'].' '.$row['model']."?";
@@ -53,6 +54,7 @@ cars.owner_id = users.id');
                         </button>
                     </form>
                 </td>
+                <?php endif; ?>
             </tr>
         <?php endwhile; ?>
             </tbody>
