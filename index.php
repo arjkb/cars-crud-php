@@ -46,8 +46,12 @@ cars.owner_id = users.id');
                     $delete_confirmation_msg = "Are you sure you wish to delete #".
                     $row['id'].' '.$row['year'].' '.$row['make'].' '.$row['model']."?";
                  ?>
-
-                    <button onclick="return confirm(' <?= $delete_confirmation_msg ?>')">Delete</button>
+                    <form action="delete.php" method="post">
+                        <input type="hidden" name="carid" value="<?= $row['id'] ?>">
+                        <button name='cardeletebutton' onclick="return confirm(' <?= $delete_confirmation_msg ?>')">
+                            Delete
+                        </button>
+                    </form>
                 </td>
             </tr>
         <?php endwhile; ?>
