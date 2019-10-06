@@ -12,6 +12,7 @@ cars.owner_id = users.id');
         <title>Cars CRUD</title>
     </head>
     <body>
+        <?php include "navigation.php"; ?>
         <h1>Cars</h1>
 
         <table>
