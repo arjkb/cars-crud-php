@@ -28,6 +28,12 @@
 
         if(password_verify($password, $passhash_db))    {
             echo "<br> passwords match!";
+            $_SESSION['userid'] = $userid_db;
+            $_SESSION['username'] = $username_db;
+            $_SESSION['useremail'] = $useremail;
+
+            // redirect if login was succesful
+            header('Location: index.php');
         }
     }
     // echo "invalid!";
