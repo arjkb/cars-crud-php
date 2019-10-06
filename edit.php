@@ -4,16 +4,11 @@
 
     if (isset($_POST['cardeditbutton'])) {
         $carid = $_POST['cardid'];
-        echo "edit button clicked! $carid";
-
         $stmt_select = $pdo->prepare('SELECT id, make, model, year, kilometer, transmission, owner_id FROM cars WHERE id = :carid');
         $stmt_select->execute(array(':carid' => $carid));
-
         $cardetails = $stmt_select->fetch(PDO::FETCH_ASSOC);
     } elseif (isset($_POST['updatebtn'])) {
-        // code...
         $carid = $_POST['carid'];
-        echo "updating $carid";
 
         $stmt_update = $pdo->prepare('UPDATE cars SET make = :make, model = :model, year = :year, kilometer = :kilometer, transmission = :transmission, owner_id = :owner_id  WHERE id = :carid');
         $stmt_update->execute(array(
