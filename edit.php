@@ -10,6 +10,23 @@
         $stmt_select->execute(array(':carid' => $carid));
 
         $cardetails = $stmt_select->fetch(PDO::FETCH_ASSOC);
+    } elseif (isset($_POST['updatebtn'])) {
+        // code...
+        $carid = $_POST['carid'];
+        echo "updating $carid";
+
+        $stmt_update = $pdo->prepare('UPDATE cars SET make = :make, model = :model, year = :year, kilometer = :kilometer, transmission = :transmission, owner_id = :owner_id  WHERE id = :carid');
+        $stmt_update->execute(array(
+            ':make' => $_POST['make'],
+            ':model' => $_POST['model'],
+            ':year' => $_POST['year'],
+            ':kilometer' => $_POST['kilometer'],
+            ':transmission' => $_POST['transmission'],
+            ':owner_id' => $_POST['owner_id'],
+            ':carid' => $carid
+        ));
+
+        header('Location: index.php');
     }
 ?>
 
@@ -22,6 +39,7 @@
     <body>
 
         <form action="" method="post">
+            <input type="hidden" name="carid" value="<?= $carid ?>">
             <input type="text" name="make" placeholder="Make" value="<?= $cardetails['make'] ?>" required> <br >
             <input type="text" name="model" placeholder="Model" value="<?= $cardetails['model'] ?>" required> <br >
             <input type="number" name="year" min="1900" value="<?= date("Y") ?>" max="<?= date("Y") ?>" value="<?= $cardetails['year'] ?>" required> <br >
