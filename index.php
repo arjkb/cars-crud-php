@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require_once('pdo.php');
 
     $stmt_select = $pdo->query('SELECT cars.id, cars.make, cars.model, cars.year, cars.kilometer, cars.transmission, users.username FROM cars INNER JOIN users ON
@@ -12,7 +13,12 @@ cars.owner_id = users.id');
         <title>Cars CRUD</title>
     </head>
     <body>
+        <?php include "navigation.php"; ?>
+
         <h1>Cars</h1>
+        <?php if(isset($_SESSION['username'])): ?>
+            <h3> Welcome, <?= $_SESSION['username'] ?>! </h3>
+        <?php endif; ?>
 
         <table>
             <thead>
