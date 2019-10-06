@@ -29,6 +29,7 @@ cars.owner_id = users.id');
                 <th>Kilometer</th>
                 <th>Transmission</th>
                 <th>Owner Name</th>
+                <th></th>
             </thead>
             <tbody>
         <?php while ($row = $stmt_select->fetch(PDO::FETCH_ASSOC)): ?>
@@ -40,6 +41,20 @@ cars.owner_id = users.id');
                 <td><?= $row['kilometer'] ?></td>
                 <td><?= $row['transmission'] ?></td>
                 <td><?= $row['username'] ?></td>
+                <td>
+                <?php if(isset($_SESSION['userid'])): ?>
+                <?php
+                    $delete_confirmation_msg = "Are you sure you wish to delete #".
+                    $row['id'].' '.$row['year'].' '.$row['make'].' '.$row['model']."?";
+                 ?>
+                    <form action="delete.php" method="post">
+                        <input type="hidden" name="carid" value="<?= $row['id'] ?>">
+                        <button name='cardeletebutton' onclick="return confirm(' <?= $delete_confirmation_msg ?>')">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+                <?php endif; ?>
             </tr>
         <?php endwhile; ?>
             </tbody>
