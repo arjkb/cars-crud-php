@@ -13,6 +13,22 @@
         $password = $_POST['password'];
         echo "User email = $useremail <br>";
         echo "User password = $password <br>";
+
+        $stmt_user_credentials = $pdo->prepare('SELECT id, username, passhash FROM users WHERE useremail LIKE :email');
+        $stmt_user_credentials->execute(array(':email' => $useremail));
+
+        $row_user_credentials = $stmt_user_credentials->fetch(PDO::FETCH_ASSOC);
+        $userid_db = $row_user_credentials['id'];
+        $username_db = $row_user_credentials['username'];
+        $passhash_db = $row_user_credentials['passhash'];
+
+        echo "<br> $userid_db";
+        echo "<br> $username_db";
+        echo "<br> $passhash_db";
+
+        if(password_verify($password, $passhash_db))    {
+            echo "<br> passwords match!";
+        }
     }
     // echo "invalid!";
 ?>
