@@ -3,7 +3,7 @@
     require_once('pdo.php');
 
     if(isset($_POST['cardeletebutton'])) {
-        $carid = $_POST['carid'];
+        $carid = $_POST['cardid'];
         echo "delete button clicked! <br />";
         echo " deleting car #".$carid;
 
