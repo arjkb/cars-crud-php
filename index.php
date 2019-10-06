@@ -57,6 +57,42 @@ cars.owner_id = users.id');
                 <?php endif; ?>
             </tr>
         <?php endwhile; ?>
+
+        <!-- create car form for logged in users -->
+        <?php if(isset($_SESSION['userid'])): ?>
+            <form action="create.php" method="post">
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="text" name="make" placeholder="Make" required>
+                    </td>
+                    <td>
+                        <input type="text" name="model" placeholder="Model" required>
+                    </td>
+                    <td>
+                        <input type="number" name="year" min="1900" value="<?= date("Y") ?>" max="<?= date("Y") ?>" required>
+                    </td>
+                    <td>
+                        <input type="text" name="kilometer" placeholder="Kilometer" required>
+                    </td>
+                    <td>
+                        <select name="transmission">
+                            <option value='Manual'>Manual</option>
+                            <option value='Torque-Converter'>Torque Converter</option>
+                            <option value='Dual-Clutch'>Dual Clutch</option>
+                            <option value='Continuously-Variable'>Continuously Variable</option>
+                            <option value='Automated-Manual'>Automated Manual</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" name="owner_id" placeholder="Owner ID" required>
+                    </td>
+                    <td>
+                        <button type="submit" name="createbtn">Create</button>
+                    </td>
+                </tr>
+            </form>
+        <?php endif; ?>
             </tbody>
         </table>
     </body>
