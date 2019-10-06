@@ -2,7 +2,7 @@
     session_start();
     require_once('pdo.php');
 
-    $stmt_select = $pdo->query('SELECT cars.id, cars.make, cars.model, cars.year, cars.kilometer, cars.transmission, users.username FROM cars INNER JOIN users ON
+    $stmt_select = $pdo->query('SELECT cars.id, cars.make, cars.model, cars.year, cars.kilometer, cars.transmission, users.username, users.id FROM cars INNER JOIN users ON
 cars.owner_id = users.id');
 ?>
 
@@ -29,6 +29,7 @@ cars.owner_id = users.id');
                 <th>Kilometer</th>
                 <th>Transmission</th>
                 <th>Owner Name</th>
+                <th></th>
             </thead>
             <tbody>
         <?php while ($row = $stmt_select->fetch(PDO::FETCH_ASSOC)): ?>
