@@ -2,7 +2,7 @@
     session_start();
     require_once('pdo.php');
 
-    $stmt_select = $pdo->query('SELECT cars.id, cars.make, cars.model, cars.year, cars.kilometer, cars.transmission, users.username, users.id FROM cars INNER JOIN users ON
+    $stmt_select = $pdo->query('SELECT cars.id, cars.make, cars.model, cars.year, cars.kilometer, cars.transmission, users.username FROM cars INNER JOIN users ON
 cars.owner_id = users.id');
 ?>
 
@@ -41,6 +41,14 @@ cars.owner_id = users.id');
                 <td><?= $row['kilometer'] ?></td>
                 <td><?= $row['transmission'] ?></td>
                 <td><?= $row['username'] ?></td>
+                <td>
+                <?php
+                    $delete_confirmation_msg = "Are you sure you wish to delete #".
+                    $row['id'].' '.$row['year'].' '.$row['make'].' '.$row['model']."?";
+                 ?>
+
+                    <button onclick="return confirm(' <?= $delete_confirmation_msg ?>')">Delete</button>
+                </td>
             </tr>
         <?php endwhile; ?>
             </tbody>
